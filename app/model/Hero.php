@@ -13,24 +13,11 @@ class Hero
     private $speed;
     private $luck;
 
-    /**
-     * Hero constructor.
-     * @param $name
-     * @param $health
-     * @param $strength
-     * @param $defence
-     * @param $speed
-     * @param $lucky
-     */
-    public function __construct($name, $health, $strength, $defence, $speed, $lucky)
+    public function __toString()
     {
-        $this->name = $name;
-        $this->health = $health;
-        $this->strength = $strength;
-        $this->defence = $defence;
-        $this->speed = $speed;
-        $this->luck = $lucky;
+        return "Health: $this->health " ;
     }
+
 
     /**
      * @return mixed
@@ -129,11 +116,29 @@ class Hero
     }
     
 
-    public static RANGE_HEALTH = 10;
+    // - Static methods
 
-    public static function dummy(): Hero
+    /**
+     * Initialize Orderus object
+     *
+     * @return Hero
+     */
+    public static function initializeOrderus(): Hero
     {
-        $rangeHealth = new Range(1)
-        return new Hero("Orderus", )
+        $RANGE_HEALTH = new Range(70, 100);
+        $RANGE_STRENGTH = new Range(70, 80);
+        $RANGE_DEFENCE = new Range(45, 55);
+        $RANGE_SPEED = new Range(40, 50);
+        $RANGE_LUCK = new Range(10, 30);
+
+        $hero = new Hero();
+        $hero->setName("beast");
+        $hero->setHealth($RANGE_HEALTH->getRandom());
+        $hero->setStrength($RANGE_STRENGTH->getRandom());
+        $hero->setDefence($RANGE_DEFENCE->getRandom());
+        $hero->setSpeed($RANGE_SPEED->getRandom());
+        $hero->setLuck($RANGE_LUCK->getRandom());
+
+        return $hero;
     }
 }

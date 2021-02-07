@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Helper\Range;
+
 class Monster
 {
     private $name;
@@ -11,23 +13,9 @@ class Monster
     private $speed;
     private $luck;
 
-    /**
-     * Monster constructor.
-     * @param $name
-     * @param $health
-     * @param $strength
-     * @param $defence
-     * @param $speed
-     * @param $luck
-     */
-    public function __construct($name, $health, $strength, $defence, $speed, $luck)
+    public function __toString()
     {
-        $this->name = $name;
-        $this->health = $health;
-        $this->strength = $strength;
-        $this->defence = $defence;
-        $this->speed = $speed;
-        $this->luck = $luck;
+        return "Name: $this->name Health: $this->health";
     }
 
     /**
@@ -126,5 +114,30 @@ class Monster
         $this->luck = $luck;
     }
 
+    // - Static methods
+
+    /**
+     * Initialize a new beast
+     *
+     * @return Monster
+     */
+    public static function generateMonster(): Monster
+    {
+        $RANGE_HEALTH = new Range(70, 100);
+        $RANGE_STRENGTH = new Range(70, 80);
+        $RANGE_DEFENCE = new Range(45, 55);
+        $RANGE_SPEED = new Range(40, 50);
+        $RANGE_LUCK = new Range(10, 30);
+
+        $monster = new Monster();
+        $monster->setName("beast");
+        $monster->setHealth($RANGE_HEALTH->getRandom());
+        $monster->setStrength($RANGE_STRENGTH->getRandom());
+        $monster->setDefence($RANGE_DEFENCE->getRandom());
+        $monster->setSpeed($RANGE_SPEED->getRandom());
+        $monster->setLuck($RANGE_LUCK->getRandom());
+
+        return $monster;
+    }
 
 }
