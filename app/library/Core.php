@@ -17,13 +17,12 @@ class Core
         if (file_exists($controllerFilePath)) {
 
             // instantiate controller
-            require_once $controllerFilePath;
+            $this->controller = "\\App\\Controller\\" . $this->controller;
             $this->controller = new $this->controller;
 
             if (method_exists($this->controller, $this->action)) {
                 call_user_func_array([$this->controller, $this->action], $this->params);
             }
-
         }
     }
 
