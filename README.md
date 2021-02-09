@@ -29,10 +29,76 @@ But be careful when you edit **httpd-vhosts.conf** for the macOS 11 you have to 
 </VirtualHost>
 ```
 
+4) Routes:
+
+- **BASE_URL**: hero.lh
+- Home: **/**  or **/home**
+- About: **/home/about** 
+- API Battle: **/api/battle**
+
+
 ### Technical
 1. Libraries: Bootstrap, AngularJS
 2. Chaining methods
+3. API JSON 
+
+```
+{
+  "hero": {
+    "name": "Orderus",
+    "health": 84,
+    "strength": 70,
+    "defence": 51,
+    "speed": 40,
+    "luck": 29
+  },
+  "monster": {
+    "name": "Lucifer",
+    "health": 92,
+    "strength": 80,
+    "defence": 49,
+    "speed": 42,
+    "luck": 12
+  },
+  "winner": {
+    "name": "Orderus",
+    "health": 12,
+    "strength": 70,
+    "defence": 51,
+    "speed": 40,
+    "luck": 29
+  },
+  "numberOfTurnsPlayed": 12,
+  "rounds": [
+    {
+      "turnNumber": 1,
+      "attackerName": "Lucifer",
+      "defenderName": "Orderus",
+      "damage": null,
+      "hero": {
+        "name": "Orderus",
+        "health": 84,
+        "strength": 70,
+        "defence": 51,
+        "speed": 40,
+        "luck": 29
+      },
+      "monster": {
+        "name": "Lucifer",
+        "health": 92,
+        "strength": 80,
+        "defence": 49,
+        "speed": 42,
+        "luck": 12
+      },
+      "hasDefenderSkippedAttack": true
+    },
+    ...
+  ]
+}
+```
 
 ### Known issues
 1. 404 NOT FOUND for API/WEB
 2. Better compare method for AbstractPlayer
+3. Adjust path from */home/about* to */about* 
