@@ -1,15 +1,17 @@
 var app = angular.module('app', []);
 
 app.controller("BattleController", function($scope, $http, BattleService) {
-    $scope.battle = {};
+    $scope.battle = null;
     $scope.error = null;
 
-    BattleService.index().then(function (battle){
-        $scope.battle = battle;
-        console.log(battle);
-    }, function (error){
-        $scope.error = error;
-    });
+    $scope.battleAction = function () {
+        BattleService.index().then(function (battle){
+            $scope.battle = battle;
+            console.log(battle);
+        }, function (error){
+            $scope.error = error;
+        });
+    }
 
 });
 
