@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Helper\Range;
+
 abstract class AbstractPlayer
 {
     /**
@@ -47,26 +49,48 @@ abstract class AbstractPlayer
     // - BUSINESS LOGIC
 
     /**
-     * Calculate the damage by subtracting defender's defence from attacker's strength
+     * Calculate the damage by subtracting defender's defence from the player's strength
      *
-     * @param $attackerStrength
      * @param $defenderDefence
      * @return int damage
      */
-    public function attack($attackerStrength, $defenderDefence): int
+    public function attack(int $defenderDefence): int
     {
-        return (int)($attackerStrength - $defenderDefence);
+        return (int)($this->strength - $defenderDefence);
     }
 
     /**
      * @param $damage
-     * @return mixed
+     * @return int damage
      */
-    public function defend($damage)
+    public function defend(int $damage): int
     {
-
         return $damage;
+    }
 
+    /**
+     * Subtract health
+     *
+     * @param $damage
+     * @return $this
+     */
+    public function subtractHealth($damage): AbstractPlayer
+    {
+        $this->health -= $damage;
+        return $this;
+    }
+
+    /**
+     * Check if the player/defender was lucky and if he has skipped the attack
+     *
+     * "An attacker can miss their hit and
+     * do no damage if the defender gets lucky that turn."
+     * @return bool
+     */
+    public function hasSkippedTheAttack(): bool
+    {
+        $range = new Range(1, 100);
+        return $range->getRandom() <= $this->getLuck();
     }
 
     // - MAGIC METHODS

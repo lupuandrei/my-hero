@@ -36,6 +36,14 @@ class BattleManager
      */
     private $currentDefender;
 
+    /**
+     * The damage of after an attack.
+     * It will be update after each attack
+     *
+     * @var int
+     */
+    private $damage;
+
 
     /**
      * BattleManager constructor.
@@ -54,11 +62,17 @@ class BattleManager
     public function battle()
     {
         $this->initializeBattle();
-        
-        print_r( $this->currentAttacker);
+
+        print_r($this->currentAttacker);
         print_r($this->currentDefender);
     }
 
+    /**
+     *  Initialize the battle. First attack is made by the fastest or the luckiest
+     *
+     * "The first attack is done by the player with the higher speed. If both players have the same speed,
+     * than the attack is carried on by the player with the highest luck."
+     */
     private function initializeBattle()
     {
         if ($this->orderus->getSpeed() == $this->monster->getSpeed()) {
@@ -71,6 +85,24 @@ class BattleManager
     }
 
     /**
+     * The attack of the battle and set the defender damage
+     */
+    private function attack()
+    {
+
+        $this->damage = $this->currentAttacker->attack($this->currentDefender->getDefence());
+
+    }
+
+    /**
+     * The defend of the battle and set the defender damage
+     */
+    private function defend()
+    {
+        $this->damage = $this->currentDefender->defend($this->damage);
+    }
+
+    /**
      * Gets the opposite player/participant
      *
      * @param AbstractPlayer $attacker
@@ -78,9 +110,8 @@ class BattleManager
      * @param AbstractPlayer $currentAttacker
      * @return AbstractPlayer the opposite of current attacker
      */
-    private function getOpposite(AbstractPlayer $attacker, AbstractPlayer $defender, AbstractPlayer $currentAttacker)
+    private function getOpposite(AbstractPlayer $attacker, AbstractPlayer $defender, AbstractPlayer $currentAttacker): AbstractPlayer
     {
-
         // todo: find a better solution to compare
         if ($currentAttacker->getName() == $attacker->getName()) {
             return $defender;
