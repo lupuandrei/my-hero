@@ -3,3 +3,4 @@
 2. Controller **View** optional type 
 3. 404 NOT FOUND
 4. Libraries: Bootstrap, AngularJS
+5. Chaining methods
