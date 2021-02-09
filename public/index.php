@@ -7,12 +7,12 @@ use App\Library\Core;
 
 require_once '../app/bootstrap.php';
 
-//$init = new Core();
+$init = new Core();
 
-$test = Hero::generate(null);
-$monster = Monster::generate(null);
-
-$battleManager = new BattleManager($test, $monster);
-$battleManager->battle();
+//$test = Hero::generate(null);
+//$monster = Monster::generate(null);
+//
+//$battleManager = new BattleManager($test, $monster);
+//$battleManager->battle();
 
 

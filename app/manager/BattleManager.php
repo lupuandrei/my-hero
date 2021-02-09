@@ -69,11 +69,23 @@ class BattleManager
         while (($this->turns > 0) && ($this->orderus->isAlive()) && ($this->monster->isAlive())) {
             $this->turns--;
 
-            $flag = $this->fight();
-            $battle->addRound(clone $this->round);
-            $battle->setNumberOfTurnsPlayed(self::$TURNS_DEFAULT - $this->turns);
+            $round = $this->fight();
+            $battle->addRound($round);
         }
 
+        // set winner
+        if ($this->turns == 0) {
+            $winner = $this->orderus->getHealth() > $this->monster->getHealth() ? $this->orderus : $this->monster;
+            $battle->setWinner($winner);
+        } else {
+            $winner = $this->orderus->isAlive() ? $this->orderus : $this->monster;
+            $battle->setWinner($winner);
+        }
+        $battle->setNumberOfTurnsPlayed(self::$TURNS_DEFAULT - $this->turns);
+
+
+//        header('Content-Type: application/json');
+//        echo json_encode($battle->jsonSerialize());
         print_r(json_encode($battle->jsonSerialize()));
 
     }
@@ -95,25 +107,26 @@ class BattleManager
         $this->currentDefender = $this->getOpposite($this->orderus, $this->monster, $this->currentAttacker);
     }
 
+
     /**
-     * @return bool
+     * @return Round
      */
-    private function fight()
+    private function fight(): Round
     {
-        $this->round = new Round(self::$TURNS_DEFAULT - $this->turns);
+        $round = new Round(self::$TURNS_DEFAULT - $this->turns);
 
         $isLuckyDefender = FALSE;
         if (!$this->currentDefender->hasSkippedTheAttack()) {
             $this->attack();
             $this->defend();
 
-            $this->round->setDamage($this->damage);
+            $round->setDamage($this->damage);
             $this->currentDefender->subtractHealth($this->damage);
         } else {
             $isLuckyDefender = TRUE;
         }
 
-        $this->round
+        $round
             ->setAttackerName($this->currentAttacker->getName())
             ->setDefenderName($this->currentDefender->getName())
             ->setHasDefenderSkippedAttack($isLuckyDefender)
@@ -123,7 +136,7 @@ class BattleManager
         $this->currentDefender = $this->currentAttacker;
         $this->currentAttacker = $this->getOpposite($this->orderus, $this->monster, $this->currentAttacker);
 
-        return $isLuckyDefender;
+        return $round;
     }
 
     /**
@@ -132,6 +145,7 @@ class BattleManager
     private function attack()
     {
         $this->damage = $this->currentAttacker->attack($this->currentDefender->getDefence());
+
     }
 
     /**

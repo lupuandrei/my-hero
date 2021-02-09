@@ -151,7 +151,7 @@ class Battle implements JsonSerializable
         return [
             "hero" => $this->hero->jsonSerialize(),
             "monster" => $this->monster->jsonSerialize(),
-//            "winner" => $this->winner->jsonSerialize(),
+            "winner" => $this->winner->jsonSerialize(),
             "numberOfTurnsPlayed" => $this->numberOfTurnsPlayed,
             "rounds" => $roundsSerialized
         ];
