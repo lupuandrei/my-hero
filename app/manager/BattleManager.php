@@ -65,6 +65,7 @@ class BattleManager
 
         print_r($this->currentAttacker);
         print_r($this->currentDefender);
+        $this->fight();
     }
 
     /**
@@ -85,13 +86,32 @@ class BattleManager
     }
 
     /**
+     * @return bool
+     */
+    private function fight()
+    {
+        $isLuckyDefender = FALSE;
+        if (!$this->currentDefender->hasSkippedTheAttack()) {
+            $this->attack();
+            $this->defend();
+
+            $this->currentDefender->subtractHealth($this->damage);
+        } else {
+            $isLuckyDefender = TRUE;
+        }
+
+        $this->currentDefender = $this->currentAttacker;
+        $this->currentAttacker = $this->getOpposite($this->orderus, $this->monster, $this->currentAttacker);
+
+        return $isLuckyDefender;
+    }
+
+    /**
      * The attack of the battle and set the defender damage
      */
     private function attack()
     {
-
         $this->damage = $this->currentAttacker->attack($this->currentDefender->getDefence());
-
     }
 
     /**
