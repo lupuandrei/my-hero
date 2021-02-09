@@ -14,12 +14,6 @@ class HomeController extends Controller
     {
         $this->view(["home", "index"]);
         $this->view->render();
-
-        $test = Hero::generate(null);
-        $monster = Monster::generate(null);
-
-        $battleManager = new BattleManager($test, $monster);
-        $battleManager->battle();
     }
 
     public function about()
