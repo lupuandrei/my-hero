@@ -15,6 +15,4 @@ $monster = Monster::generate(null);
 $battleManager = new BattleManager($test, $monster);
 $battleManager->battle();
 
-echo $test;
-echo $monster;
 

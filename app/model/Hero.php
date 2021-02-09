@@ -7,6 +7,67 @@ use App\Helper\Range;
 class Hero extends AbstractPlayer
 {
     /**
+     * Strike twice while it’s his turn to attack;
+     * there’s a 10% chance he’ll use this skill every time he attacks
+     *
+     * @var int
+     */
+    private $attackTwiceChance = 10;
+
+    /**
+     * Takes only half of the usual damage when an enemy attacks;
+     * there’s a 20% change he’ll use this skill every time he defends.
+     *
+     * @var int
+     */
+    private $defenceShieldChance = 20;
+
+    public function attack($defenderDefence): int
+    {
+        $damage = parent::attack($defenderDefence);
+        if ($this->rapidStrike()) {
+            $damage *= 2;
+        }
+
+        return $damage;
+    }
+
+    public function defend($damage): int
+    {
+        if ($this->magicShield()) {
+            $damage /= 2;
+        }
+
+        return $damage;
+    }
+
+    // - SKILLS
+
+    /**
+     * Rapid Strike - strike twice while it's his turn to attack and
+     * there is a 10% chance he use this skill
+     * return bool
+     * */
+    private function rapidStrike() : bool
+    {
+        $range = new Range(1,100);
+        return $range->getRandom() <= $this->attackTwiceChance;
+    }
+
+    /**
+     * Magic shield - it takes only a half of the usual damage when he is attacked and
+     * there are 20% chances of using this skill
+     * return TRUE/FALSE
+     * @return bool
+     */
+    private function magicShield() : bool
+    {
+        $range = new Range(1,100);
+        return $range->getRandom() <= $this->defenceShieldChance;
+    }
+
+
+    /**
      * Initialize Orderus object
      *
      * @param string|null $name
@@ -21,8 +82,7 @@ class Hero extends AbstractPlayer
         $RANGE_LUCK = new Range(10, 30);
 
         $hero = new Hero();
-        $hero->setName("andrei")
-            ->setName( $name ?? "Orderus")
+        $hero->setName($name ?? "Orderus")
             ->setHealth($RANGE_HEALTH->getRandom())
             ->setStrength($RANGE_STRENGTH->getRandom())
             ->setDefence($RANGE_DEFENCE->getRandom())

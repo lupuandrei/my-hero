@@ -3,8 +3,10 @@
 namespace App\Manager;
 
 use App\Model\AbstractPlayer;
+use App\Model\Battle;
 use App\Model\Hero;
 use App\Model\Monster;
+use App\Model\Round;
 
 class BattleManager
 {
@@ -44,7 +46,6 @@ class BattleManager
      */
     private $damage;
 
-
     /**
      * BattleManager constructor.
      * @param Hero $orderus
@@ -63,9 +64,18 @@ class BattleManager
     {
         $this->initializeBattle();
 
-        print_r($this->currentAttacker);
-        print_r($this->currentDefender);
-        $this->fight();
+        $battle = new Battle(clone $this->orderus, clone $this->monster);
+
+        while (($this->turns > 0) && ($this->orderus->isAlive()) && ($this->monster->isAlive())) {
+            $this->turns--;
+
+            $flag = $this->fight();
+            $battle->addRound(clone $this->round);
+            $battle->setNumberOfTurnsPlayed(self::$TURNS_DEFAULT - $this->turns);
+        }
+
+        print_r(json_encode($battle->jsonSerialize()));
+
     }
 
     /**
@@ -90,15 +100,25 @@ class BattleManager
      */
     private function fight()
     {
+        $this->round = new Round(self::$TURNS_DEFAULT - $this->turns);
+
         $isLuckyDefender = FALSE;
         if (!$this->currentDefender->hasSkippedTheAttack()) {
             $this->attack();
             $this->defend();
 
+            $this->round->setDamage($this->damage);
             $this->currentDefender->subtractHealth($this->damage);
         } else {
             $isLuckyDefender = TRUE;
         }
+
+        $this->round
+            ->setAttackerName($this->currentAttacker->getName())
+            ->setDefenderName($this->currentDefender->getName())
+            ->setHasDefenderSkippedAttack($isLuckyDefender)
+            ->setHero(clone $this->orderus)
+            ->setMonster(clone $this->monster);
 
         $this->currentDefender = $this->currentAttacker;
         $this->currentAttacker = $this->getOpposite($this->orderus, $this->monster, $this->currentAttacker);

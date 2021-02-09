@@ -3,8 +3,9 @@
 namespace App\Model;
 
 use App\Helper\Range;
+use JsonSerializable;
 
-abstract class AbstractPlayer
+abstract class AbstractPlayer implements JsonSerializable
 {
     /**
      * @var string
@@ -43,8 +44,6 @@ abstract class AbstractPlayer
     {
         return $this->name;
     }
-
-
 
     // - BUSINESS LOGIC
 
@@ -91,6 +90,11 @@ abstract class AbstractPlayer
     {
         $range = new Range(1, 100);
         return $range->getRandom() <= $this->getLuck();
+    }
+
+    public function isAlive(): bool
+    {
+        return $this->health > 0;
     }
 
     // - MAGIC METHODS
@@ -211,5 +215,18 @@ abstract class AbstractPlayer
         $this->luck = $luck;
         return $this;
     }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            "name" => $this->name,
+            "health" => $this->health,
+            "strength" => $this->strength,
+            "defence" => $this->defence,
+            "speed" => $this->speed,
+            "luck" => $this->luck,
+        ];
+    }
+
 
 }
