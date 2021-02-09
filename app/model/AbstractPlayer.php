@@ -43,6 +43,51 @@ abstract class AbstractPlayer
     }
 
 
+
+    // - BUSINESS LOGIC
+
+    /**
+     * Calculate the damage by subtracting defender's defence from attacker's strength
+     *
+     * @param $attackerStrength
+     * @param $defenderDefence
+     * @return int damage
+     */
+    public function attack($attackerStrength, $defenderDefence): int
+    {
+        return (int)($attackerStrength - $defenderDefence);
+    }
+
+    /**
+     * @param $damage
+     * @return mixed
+     */
+    public function defend($damage)
+    {
+
+        return $damage;
+
+    }
+
+    // - MAGIC METHODS
+
+    public function __toString()
+    {
+        return "Name: $this->name Health: $this->health";
+    }
+
+    // - ABSTRACT METHODS
+
+    /**
+     * @param ?string $name
+     * @return AbstractPlayer
+     */
+    abstract static public function generate(?string $name): AbstractPlayer;
+
+
+
+    // - GETTERS &  SETTERS
+
     /**
      * @param string $name
      * @return $this
@@ -143,43 +188,4 @@ abstract class AbstractPlayer
         return $this;
     }
 
-    // - BUSINESS LOGIC
-
-    /**
-     * Calculate the damage by subtracting defender's defence from attacker's strength
-     *
-     * @param $attackerStrength
-     * @param $defenderDefence
-     * @return int damage
-     */
-    public function attack($attackerStrength, $defenderDefence): int
-    {
-        return (int)($attackerStrength - $defenderDefence);
-    }
-
-    /**
-     * @param $damage
-     * @return mixed
-     */
-    public function defend($damage)
-    {
-
-        return $damage;
-
-    }
-
-    // - MAGIC METHODS
-
-    public function __toString()
-    {
-        return "Name: $this->name Health: $this->health";
-    }
-
-    // - ABSTRACT METHODS
-
-    /**
-     * @param ?string $name
-     * @return AbstractPlayer
-     */
-    abstract static public function generate(?string $name): AbstractPlayer;
 }
