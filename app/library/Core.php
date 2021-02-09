@@ -23,9 +23,11 @@ class Core
             if (method_exists($this->controller, $this->action)) {
                 call_user_func_array([$this->controller, $this->action], $this->params);
             }
+        } else {
+            // TODO: 404 NOT Found
+            echo "test";
         }
     }
-
 
     protected function prepareURL()
     {

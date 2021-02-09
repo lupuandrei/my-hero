@@ -4,27 +4,22 @@ namespace App\Library;
 
 class Controller
 {
+    /**
+     * @var View
+     */
+    protected $view;
 
-    // Load model
-    public function model($model)
+    /**
+     * Use $viewPathComponents as array instead of string to prevent the differences between OS.
+     *
+     * @param $viewPathComponents
+     * @param array $data
+     * @return View
+     */
+    public function view($viewPathComponents, $data = [])
     {
-        // Require model file
-        require_once '../app/model/' . $model . '.php';
-
-        //Instantiate model
-        return new $model();
-    }
-
-    // Load view
-    public function view($view, $data = [])
-    {
-        // Check for view file
-        if(file_exists('../app/view/' . $view . '.php')) {
-            require_once ('../app/view/' . $view . '.php');
-        } else{
-            /// View does not exists
-            die ('View does not exists');
-        }
+        $this->view = new View(implode(DIRECTORY_SEPARATOR,$viewPathComponents), $data);
+        return $this->view;
     }
 
 }
