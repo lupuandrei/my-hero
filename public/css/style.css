@@ -1,0 +1,8 @@
+p.breakline {
+    white-space: pre-wrap;
+    word-break: normal;
+}
+
+main > .container {
+    padding: 60px 15px 0;
+}
