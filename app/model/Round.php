@@ -207,38 +207,8 @@ class Round implements JsonSerializable
 
     public function jsonSerialize(): array
     {
-
-        /*
-         {
-  "hero": {
-    "name": "orderus",
-    "strenght": 80,
-    "health": 49
-  },
-  "monster": {
-    "name": "beast",
-    "strenght": 69,
-    "health":70
-  },
-  "battle": {
-    "winner": "hero",
-    "number_of_figths": 30,
-    "rounds": {
-      "turn": 1,
-      "attacker_name": "Beast",
-      "defender_name": "Orderus",
-      "skills": ["magic_shiled"],
-      "damage": 11,
-      ""
-      "hero": {
-        "health": ""
-      }
-    }
-  }
-}
-         */
         return [
-            "turn" => $this->turnNumber,
+            "turnNumber" => $this->turnNumber,
             "attackerName" => $this->attackerName,
             "defenderName" => $this->defenderName,
             "skills" => $this->skillsUsed,

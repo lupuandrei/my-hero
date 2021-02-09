@@ -1,5 +1,91 @@
 <?php require APP_ROOT . '/view/_shared/header.twig' ?>
 
-<h1>Home</h1>
+<div ng-controller="BattleController">
+    <h1>Home</h1>
+
+    <div class="card-group">
+
+        <div class="card">
+            <img src="/image/hero.png" class="card-img-top" alt="..." style="max-height: 200px;">
+            <div class="card-body">
+                <span ng-show="battle.winner.name == battle.hero.name" class="badge badge-success float-right">winner</span>
+                <span ng-show="battle.winner.name != battle.hero.name" class="badge badge-danger float-right">loser</span>
+                <h5 class="card-title" ng-bind="battle.hero.name"></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <b>Health: </b> <span class="float-right" ng-bind="battle.hero.health"></span>
+                </li>
+                <li class="list-group-item">
+                    <b>Strength:</b> <span class="float-right" ng-bind="battle.hero.strength"></span>
+                </li>
+                <li class="list-group-item">
+                    <b>Defence:</b> <span class="float-right" ng-bind="battle.hero.defence"></span>
+                </li>
+                <li class="list-group-item">
+                    <b>Speed:</b> <span class="float-right" ng-bind="battle.hero.speed"></span>
+                </li>
+                <li class="list-group-item">
+                    <b>Luck:</b> <span class="float-right" ng-bind="battle.hero.luck"></span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <img src="/image/monster.jpg" class="card-img-top" alt="..." style="max-height: 200px;">
+            <div class="card-body">
+                <span ng-show="battle.winner.name == battle.monster.name" class="badge badge-success float-right">winner</span>
+                <span ng-show="battle.winner.name != battle.monster.name" class="badge badge-danger float-right">loser</span>
+                <h5 class="card-title" ng-bind="battle.monster.name"></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                    <b>Health: </b> <span class="float-right" ng-bind="battle.monster.health"></span>
+                </li>
+                <li class="list-group-item">
+                    <b>Strength:</b> <span class="float-right" ng-bind="battle.monster.strength"></span>
+                </li>
+                <li class="list-group-item">
+                    <b>Defence:</b> <span class="float-right" ng-bind="battle.monster.defence"></span>
+                </li>
+                <li class="list-group-item">
+                    <b>Speed:</b> <span class="float-right" ng-bind="battle.monster.speed"></span>
+                </li>
+                <li class="list-group-item">
+                    <b>Luck:</b> <span class="float-right" ng-bind="battle.monster.luck"></span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <h2 class="mt-5">Rounds</h2>
+
+    <div class="card mt-3" ng-repeat="round in battle.rounds">
+        <div class="card-body">
+            <h5 class="card-title">Round: {{ round.turnNumber }}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <b> {{ round.attackerName }}</b> has attacked <b>{{ round.defenderName }}</b>
+            </li>
+            <li class="list-group-item alert-success" ng-show="round.hasDefenderSkippedAttack">
+                <b ng-bind="round.defenderName"></b> got luck.
+            </li>
+            <li class="list-group-item">
+                <b>Damage: </b> <span ng-bind="round.damage"></span>
+            </li>
+            <li class="list-group-item">
+                <b>{{ round.hero.name }}</b> health <span> {{ round.hero.health}} </span>
+            </li>
+            <li class="list-group-item">
+                <b>{{ round.monster.name }}</b> health <span> {{ round.monster.health}} </span>
+            </li>
+        </ul>
+    </div>
+
+
+</div>
+
 
 <?php require APP_ROOT . '/view/_shared/footer.twig' ?>

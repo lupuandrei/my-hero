@@ -15,10 +15,10 @@ class BattleApiController
     {
         header('Content-Type: application/json');
 
-        $test = Hero::generate(null);
-        $monster = Monster::generate(null);
+        $hero = Hero::generate(null);
+        $monster = Monster::generate("Lucifer");
 
-        $battleManager = new BattleManager($test, $monster);
+        $battleManager = new BattleManager($hero, $monster);
         $battleManager->battle();
     }
 }
