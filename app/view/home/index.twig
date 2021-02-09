@@ -1,7 +1,6 @@
 <?php require APP_ROOT . '/view/_shared/header.twig' ?>
 
 <div ng-controller="BattleController">
-    <h1>Home</h1>
 
     <div class="jumbotron">
         <h1 class="display-4">Orederus</h1>
@@ -82,7 +81,10 @@
                     <b ng-bind="round.defenderName"></b> got luck.
                 </li>
                 <li class="list-group-item">
-                    <b>Damage: </b> <span ng-bind="round.damage"></span>
+                    <p><b>Damage: </b> <span ng-bind="round.damage.value"></span></p>
+                    <p ng-show="round.damage.skills.length > 0">
+                        <span ng-repeat="skill in round.damage.skills" class="adge badge-pill badge-primary" ng-bind="skill"></span>
+                    </p>
                 </li>
                 <li class="list-group-item">
                     <b>{{ round.hero.name }}</b> health <span> {{ round.hero.health}} </span>

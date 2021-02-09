@@ -51,18 +51,19 @@ abstract class AbstractPlayer implements JsonSerializable
      * Calculate the damage by subtracting defender's defence from the player's strength
      *
      * @param $defenderDefence
-     * @return int damage
+     * @return Damage damage
      */
-    public function attack(int $defenderDefence): int
+    public function attack(int $defenderDefence): Damage
     {
-        return (int)($this->strength - $defenderDefence);
+        $damageValue = (int)($this->strength - $defenderDefence);
+        return new Damage($damageValue);
     }
 
     /**
      * @param $damage
-     * @return int damage
+     * @return Damage damage
      */
-    public function defend(int $damage): int
+    public function defend(Damage $damage): Damage
     {
         return $damage;
     }
@@ -70,12 +71,12 @@ abstract class AbstractPlayer implements JsonSerializable
     /**
      * Subtract health
      *
-     * @param $damage
+     * @param Damage $damage
      * @return $this
      */
-    public function subtractHealth($damage): AbstractPlayer
+    public function subtractHealth(Damage $damage): AbstractPlayer
     {
-        $this->health -= $damage;
+        $this->health -= $damage->getValue();
         return $this;
     }
 

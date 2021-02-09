@@ -30,7 +30,7 @@ class Round implements JsonSerializable
 
     /**
      * The damage provoked by the attacker into the current round
-     * @var int
+     * @var Damage
      */
     private $damage;
 
@@ -135,19 +135,21 @@ class Round implements JsonSerializable
     }
 
     /**
-     * @return int
+     * @return Damage
      */
-    public function getDamage(): int
+    public function getDamage(): Damage
     {
         return $this->damage;
     }
 
     /**
-     * @param int $damage
+     * @param Damage $damage
+     * @return $this
      */
-    public function setDamage(int $damage): void
+    public function setDamage(Damage $damage): Round
     {
         $this->damage = $damage;
+        return $this;
     }
 
     /**
@@ -211,7 +213,6 @@ class Round implements JsonSerializable
             "turnNumber" => $this->turnNumber,
             "attackerName" => $this->attackerName,
             "defenderName" => $this->defenderName,
-            "skills" => $this->skillsUsed,
             "damage" => $this->damage,
             "hero" => $this->hero->jsonSerialize(),
             "monster" => $this->monster->jsonSerialize(),

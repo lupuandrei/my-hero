@@ -22,20 +22,22 @@ class Hero extends AbstractPlayer
      */
     private $defenceShieldChance = 20;
 
-    public function attack($defenderDefence): int
+    public function attack($defenderDefence): Damage
     {
         $damage = parent::attack($defenderDefence);
         if ($this->rapidStrike()) {
-            $damage *= 2;
+            $damage->setValue( $damage->getValue() * 2);
+            $damage->addSkill(Damage::$SKILL_ATTACK_RAPID_STRIKE);
         }
 
         return $damage;
     }
 
-    public function defend($damage): int
+    public function defend($damage): Damage
     {
         if ($this->magicShield()) {
-            $damage /= 2;
+            $damage->setValue($damage->getValue() / 2);
+            $damage->addSkill(Damage::$SKILL_DEFEND_MAGIC_SHIELD);
         }
 
         return $damage;

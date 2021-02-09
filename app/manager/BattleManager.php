@@ -4,6 +4,7 @@ namespace App\Manager;
 
 use App\Model\AbstractPlayer;
 use App\Model\Battle;
+use App\Model\Damage;
 use App\Model\Hero;
 use App\Model\Monster;
 use App\Model\Round;
@@ -42,7 +43,7 @@ class BattleManager
      * The damage of after an attack.
      * It will be update after each attack
      *
-     * @var int
+     * @var Damage
      */
     private $damage;
 
