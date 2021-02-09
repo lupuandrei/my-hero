@@ -8,8 +8,8 @@ require_once '../app/bootstrap.php';
 
 //$init = new Core();
 
-$test = Hero::initializeOrderus();
-$monster = Monster::generateMonster();
+$test = Hero::generate(null);
+$monster = Monster::generate(null);
 
 echo $test;
 echo $monster;

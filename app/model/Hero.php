@@ -4,17 +4,15 @@ namespace App\Model;
 
 use App\Helper\Range;
 
-class Hero extends Player
+class Hero extends AbstractPlayer
 {
-
-    // - Static methods
-
     /**
      * Initialize Orderus object
      *
-     * @return Hero
+     * @param string|null $name
+     * @return AbstractPlayer
      */
-    public static function initializeOrderus(): Hero
+    static public function generate(?string $name): AbstractPlayer
     {
         $RANGE_HEALTH = new Range(70, 100);
         $RANGE_STRENGTH = new Range(70, 80);
@@ -24,7 +22,7 @@ class Hero extends Player
 
         $hero = new Hero();
         $hero->setName("andrei")
-            ->setName("Orderus")
+            ->setName( $name ?? "Orderus")
             ->setHealth($RANGE_HEALTH->getRandom())
             ->setStrength($RANGE_STRENGTH->getRandom())
             ->setDefence($RANGE_DEFENCE->getRandom())
@@ -33,4 +31,5 @@ class Hero extends Player
 
         return $hero;
     }
+
 }

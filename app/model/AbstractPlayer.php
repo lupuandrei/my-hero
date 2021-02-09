@@ -2,7 +2,7 @@
 
 namespace App\Model;
 
-class Player
+abstract class AbstractPlayer
 {
     /**
      * @var string
@@ -47,7 +47,7 @@ class Player
      * @param string $name
      * @return $this
      */
-    public function setName(string $name): Player
+    public function setName(string $name): AbstractPlayer
     {
         $this->name = $name;
         return $this;
@@ -65,7 +65,7 @@ class Player
      * @param int $health
      * @return $this
      */
-    public function setHealth(int $health): Player
+    public function setHealth(int $health): AbstractPlayer
     {
         $this->health = $health;
         return $this;
@@ -83,7 +83,7 @@ class Player
      * @param int $strength
      * @return $this
      */
-    public function setStrength(int $strength): Player
+    public function setStrength(int $strength): AbstractPlayer
     {
         $this->strength = $strength;
         return $this;
@@ -101,7 +101,7 @@ class Player
      * @param int $defence
      * @return $this
      */
-    public function setDefence(int $defence): Player
+    public function setDefence(int $defence): AbstractPlayer
     {
         $this->defence = $defence;
         return $this;
@@ -119,7 +119,7 @@ class Player
      * @param int $speed
      * @return $this
      */
-    public function setSpeed(int $speed): Player
+    public function setSpeed(int $speed): AbstractPlayer
     {
         $this->speed = $speed;
         return $this;
@@ -137,12 +137,13 @@ class Player
      * @param int $luck
      * @return $this
      */
-    public function setLuck(int $luck): Player
+    public function setLuck(int $luck): AbstractPlayer
     {
         $this->luck = $luck;
         return $this;
     }
 
+    // - BUSINESS LOGIC
 
     /**
      * Calculate the damage by subtracting defender's defence from attacker's strength
@@ -167,10 +168,18 @@ class Player
 
     }
 
+    // - MAGIC METHODS
+
     public function __toString()
     {
         return "Name: $this->name Health: $this->health";
     }
 
+    // - ABSTRACT METHODS
 
+    /**
+     * @param ?string $name
+     * @return AbstractPlayer
+     */
+    abstract static public function generate(?string $name): AbstractPlayer;
 }
