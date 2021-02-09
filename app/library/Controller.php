@@ -12,7 +12,7 @@ class Controller
     /**
      * Use $viewPathComponents as array instead of string to prevent the differences between OS.
      *
-     * @param $viewPathComponents
+     * @param array $viewPathComponents
      * @param array $data
      * @return View
      */

@@ -4,16 +4,22 @@ namespace App\Library;
 
 class View
 {
-
+    /**
+     * @var string
+     */
     protected $viewFile;
+
+    /**
+     * @var array
+     */
     protected $viewData;
 
     /**
      * View constructor.
-     * @param $viewFile
-     * @param $viewData
+     * @param string $viewFile
+     * @param array $viewData
      */
-    public function __construct($viewFile, $viewData)
+    public function __construct(string $viewFile, array $viewData)
     {
         $this->viewFile = $viewFile;
         $this->viewData = $viewData;
