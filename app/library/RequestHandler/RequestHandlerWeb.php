@@ -2,6 +2,8 @@
 
 namespace App\Library\RequestHandler;
 
+use App\Controller\ErrorController;
+
 class RequestHandlerWeb implements RequestHandlerInterface
 {
     protected $controller = 'HomeController';
@@ -35,10 +37,13 @@ class RequestHandlerWeb implements RequestHandlerInterface
 
             if (method_exists($this->controller, $this->action)) {
                 call_user_func_array([$this->controller, $this->action], $this->params);
+            } else {
+                $this->controller = new ErrorController();
+                $this->controller->notFoundWeb();
             }
         } else {
-            // TODO: 404 NOT Found
-            echo "404 Web";
+            $this->controller = new ErrorController();
+            $this->controller->notFoundWeb();
         }
     }
 }

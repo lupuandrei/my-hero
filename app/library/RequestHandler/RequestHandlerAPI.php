@@ -10,7 +10,6 @@ class RequestHandlerAPI implements RequestHandlerInterface
     protected $action = 'index';
     protected $params = [];
 
-
     function prepareURL()
     {
         $request = trim($_SERVER["REQUEST_URI"], '/');
@@ -44,6 +43,8 @@ class RequestHandlerAPI implements RequestHandlerInterface
             // TODO: 404 NOT Found JSON FORMAT
             echo "404 API";
 //            header();
+
+//            $this->controller
         }
     }
 
