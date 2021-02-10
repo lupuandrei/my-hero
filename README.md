@@ -44,7 +44,9 @@ But be careful when you edit **httpd-vhosts.conf** for the macOS 11 you have to 
     2. [AngularJS](https://docs.angularjs.org/)
     3. [Toastr](https://www.npmjs.com/package/angular-toastr)
 2. Chaining methods
-3. API JSON 
+3. Handler request (api / web) 
+   1. handle 404 (api/web)
+4. API JSON 
 
 ```
 {
@@ -103,6 +105,5 @@ But be careful when you edit **httpd-vhosts.conf** for the macOS 11 you have to 
 ```
 
 ### Known issues
-1. 404 NOT FOUND for API/WEB
-2. Better compare method for AbstractPlayer
-3. Adjust path from */home/about* to */about* 
+1. Better compare method for AbstractPlayer
+2. Adjust path from */home/about* to */about* 
