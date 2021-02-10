@@ -4,6 +4,8 @@
 namespace App\Library\RequestHandler;
 
 
+use App\Controller\ErrorController;
+
 class RequestHandlerAPI implements RequestHandlerInterface
 {
     protected $controller = 'BattleApiController';
@@ -38,13 +40,13 @@ class RequestHandlerAPI implements RequestHandlerInterface
 
             if (method_exists($this->controller, $this->action)) {
                 call_user_func_array([$this->controller, $this->action], $this->params);
+            } else {
+                $this->controller = new ErrorController();
+                $this->controller->notFoundApi();
             }
         } else {
-            // TODO: 404 NOT Found JSON FORMAT
-            echo "404 API";
-//            header();
-
-//            $this->controller
+            $this->controller = new ErrorController();
+            $this->controller->notFoundApi();
         }
     }
 
