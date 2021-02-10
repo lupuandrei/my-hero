@@ -3,11 +3,11 @@
 <div ng-controller="BattleController">
 
     <div class="jumbotron">
-        <h1 class="display-4">Orederus</h1>
+        <h1 class="display-4">Orderus</h1>
         <p class="lead">Once upon a time there was a great hero, called Orderus, with some strengths and weaknesses,
             as all heroes have.</p>
         <hr class="my-4">
-        <a class="btn btn-primary btn-lg" href="#" role="button" ng-click="battleAction()">Battle <span ng-show="battle != null">again</span></a>
+        <button class="btn btn-primary btn-lg" role="button" ng-click="battleAction()">Battle <span ng-show="battle != null">again</span></button>
     </div>
 
     <div ng-show="battle != null">
@@ -22,19 +22,19 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <b>Health: </b> <span class="float-right" ng-bind="battle.hero.health"></span>
+                        <b>Health: </b> <span class="float-right badge badge-pill badge-primary" ng-bind="battle.hero.health"></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Strength:</b> <span class="float-right" ng-bind="battle.hero.strength"></span>
+                        <b>Strength:</b> <span class="float-right badge badge-pill badge-primary" ng-bind="battle.hero.strength"></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Defence:</b> <span class="float-right" ng-bind="battle.hero.defence"></span>
+                        <b>Defence:</b> <span class="float-right badge badge-pill badge-primary" ng-bind="battle.hero.defence"></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Speed:</b> <span class="float-right" ng-bind="battle.hero.speed"></span>
+                        <b>Speed:</b> <span class="float-right badge badge-pill badge-primary" ng-bind="battle.hero.speed"></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Luck:</b> <span class="float-right" ng-bind="battle.hero.luck"></span>
+                        <b>Luck:</b> <span class="float-right badge badge-pill badge-primary" ng-bind="battle.hero.luck"></span>
                     </li>
                 </ul>
             </div>
@@ -48,19 +48,19 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <b>Health: </b> <span class="float-right" ng-bind="battle.monster.health"></span>
+                        <b>Health: </b> <span class="float-right badge badge-pill badge-primary" ng-bind="battle.monster.health"></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Strength:</b> <span class="float-right" ng-bind="battle.monster.strength"></span>
+                        <b>Strength:</b> <span class="float-right badge badge-pill badge-primary" ng-bind="battle.monster.strength"></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Defence:</b> <span class="float-right" ng-bind="battle.monster.defence"></span>
+                        <b>Defence:</b> <span class="float-right badge badge-pill badge-primary" ng-bind="battle.monster.defence"></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Speed:</b> <span class="float-right" ng-bind="battle.monster.speed"></span>
+                        <b>Speed:</b> <span class="float-right badge badge-pill badge-primary" ng-bind="battle.monster.speed"></span>
                     </li>
                     <li class="list-group-item">
-                        <b>Luck:</b> <span class="float-right" ng-bind="battle.monster.luck"></span>
+                        <b>Luck:</b> <span class="float-right badge badge-pill badge-primary" ng-bind="battle.monster.luck"></span>
                     </li>
                 </ul>
             </div>
@@ -70,8 +70,8 @@
         <h2 class="mt-5">Rounds</h2>
 
         <div class="card mt-3" ng-repeat="round in battle.rounds">
-            <div class="card-body">
-                <h5 class="card-title">Round: {{ round.turnNumber }}</h5>
+            <div class="card-header">
+                Round: {{ round.turnNumber }}
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
@@ -81,9 +81,9 @@
                     <b ng-bind="round.defenderName"></b> got luck.
                 </li>
                 <li class="list-group-item">
-                    <p><b>Damage: </b> <span ng-bind="round.damage.value"></span></p>
+                    <p class="mb-0"><b>Damage: </b> <span> {{ round.damage.value == null ? 0 : round.damage.value }}</span></p>
                     <p ng-show="round.damage.skills.length > 0">
-                        <span ng-repeat="skill in round.damage.skills" class="adge badge-pill badge-primary" ng-bind="skill"></span>
+                        <span ng-repeat="skill in round.damage.skills" class="badge badge-pill badge-primary" ng-bind="skill"></span>
                     </p>
                 </li>
                 <li class="list-group-item">
@@ -99,8 +99,6 @@
     <div ng-show="error != null" class="alert alert-danger" role="alert">
         <p>{{ error }}</p>
     </div>
-
-
 
 </div>
 

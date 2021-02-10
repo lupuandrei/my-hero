@@ -38,7 +38,11 @@ But be careful when you edit **httpd-vhosts.conf** for the macOS 11 you have to 
 
 
 ### Technical
-1. Libraries: Bootstrap, AngularJS
+
+1. Dependencies:
+    1. [Bootstrap](https://getbootstrap.com/docs/4.6/components/badge/)
+    2. [AngularJS](https://docs.angularjs.org/)
+    3. [Toastr](https://www.npmjs.com/package/angular-toastr)
 2. Chaining methods
 3. API JSON 
 
