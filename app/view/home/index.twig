@@ -87,10 +87,10 @@
                     </p>
                 </li>
                 <li class="list-group-item">
-                    <b>{{ round.hero.name }}</b> health <span> {{ round.hero.health}} </span>
+                    <b>{{ round.hero.name }}</b> health <span ng-class="{'badge badge-pill badge-danger': round.hero.health <= 0 }"> {{ round.hero.health}} </span>
                 </li>
                 <li class="list-group-item">
-                    <b>{{ round.monster.name }}</b> health <span> {{ round.monster.health}} </span>
+                    <b>{{ round.monster.name }}</b> health <span ng-class="{'badge badge-pill badge-danger': round.monster.health <= 0 }"> {{ round.monster.health}} </span>
                 </li>
             </ul>
         </div>
